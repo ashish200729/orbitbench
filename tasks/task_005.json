@@ -1,0 +1,239 @@
+{
+  "id": "task_005",
+  "title": "Edit Distance on RLE-Encoded Strings",
+  "language": "python",
+  "difficulty": "hard",
+  "source": "Custom \u2014 edit distance + run-length encoding",
+  "description": "Write a Python function `rle_edit_distance(s: list, t: list) -> int`.\n\nBoth `s` and `t` are run-length encoded (RLE) strings. Each is a list of `[char, count]` pairs, e.g. `[['a', 3], ['b', 2]]` represents `'aaabb'`.\n\nReturn the minimum edit distance (Levenshtein distance) between the two decoded strings. Operations: insert one character (+1 cost), delete one character (+1 cost), replace one character (+1 cost).\n\nAn empty RLE list represents the empty string.\n\nFunction signature:\ndef rle_edit_distance(s: list, t: list) -> int:",
+  "function_signature": "def rle_edit_distance(s: list, t: list) -> int:",
+  "constraints": [
+    "0 <= len(s), len(t) <= 50 (number of RLE groups)",
+    "1 <= count <= 100 per group",
+    "char is a single lowercase letter",
+    "Total decoded length <= 1000"
+  ],
+  "test_cases": [
+    {
+      "id": "tc_001",
+      "input": {
+        "s": [
+          [
+            "a",
+            3
+          ],
+          [
+            "b",
+            2
+          ]
+        ],
+        "t": [
+          [
+            "a",
+            2
+          ],
+          [
+            "b",
+            3
+          ]
+        ]
+      },
+      "expected_output": 1,
+      "description": ""
+    },
+    {
+      "id": "tc_002",
+      "input": {
+        "s": [
+          [
+            "a",
+            1
+          ]
+        ],
+        "t": [
+          [
+            "a",
+            1
+          ]
+        ]
+      },
+      "expected_output": 0,
+      "description": ""
+    },
+    {
+      "id": "tc_003",
+      "input": {
+        "s": [
+          [
+            "a",
+            1
+          ]
+        ],
+        "t": [
+          [
+            "b",
+            1
+          ]
+        ]
+      },
+      "expected_output": 1,
+      "description": ""
+    },
+    {
+      "id": "tc_004",
+      "input": {
+        "s": [],
+        "t": [
+          [
+            "a",
+            2
+          ]
+        ]
+      },
+      "expected_output": 2,
+      "description": ""
+    },
+    {
+      "id": "tc_005",
+      "input": {
+        "s": [
+          [
+            "a",
+            2
+          ]
+        ],
+        "t": []
+      },
+      "expected_output": 2,
+      "description": ""
+    },
+    {
+      "id": "tc_006",
+      "input": {
+        "s": [
+          [
+            "a",
+            3
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "c",
+            2
+          ]
+        ],
+        "t": [
+          [
+            "a",
+            2
+          ],
+          [
+            "c",
+            3
+          ]
+        ]
+      },
+      "expected_output": 2,
+      "description": ""
+    },
+    {
+      "id": "tc_007",
+      "input": {
+        "s": [
+          [
+            "x",
+            1
+          ],
+          [
+            "y",
+            2
+          ],
+          [
+            "z",
+            1
+          ]
+        ],
+        "t": [
+          [
+            "x",
+            2
+          ],
+          [
+            "y",
+            1
+          ],
+          [
+            "z",
+            2
+          ]
+        ]
+      },
+      "expected_output": 2,
+      "description": ""
+    },
+    {
+      "id": "tc_008",
+      "input": {
+        "s": [
+          [
+            "a",
+            5
+          ]
+        ],
+        "t": [
+          [
+            "a",
+            3
+          ],
+          [
+            "b",
+            2
+          ]
+        ]
+      },
+      "expected_output": 2,
+      "description": ""
+    },
+    {
+      "id": "tc_009",
+      "input": {
+        "s": [
+          [
+            "a",
+            1
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "a",
+            1
+          ]
+        ],
+        "t": [
+          [
+            "a",
+            2
+          ],
+          [
+            "b",
+            1
+          ]
+        ]
+      },
+      "expected_output": 2,
+      "description": ""
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-05-31T00:00:00Z",
+    "tags": [
+      "dynamic-programming",
+      "string",
+      "edit-distance",
+      "rle"
+    ]
+  }
+}

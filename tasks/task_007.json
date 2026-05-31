@@ -1,0 +1,260 @@
+{
+  "id": "task_007",
+  "title": "Weighted Job Scheduling with Cooldown",
+  "language": "python",
+  "difficulty": "hard",
+  "source": "Custom \u2014 weighted job scheduling + cooldown constraint",
+  "description": "Write a Python function `max_weight(jobs: list[list[int]], cooldown: int) -> int`.\n\nYou are given a list of jobs where `jobs[i] = [start, end, weight]` (start inclusive, end exclusive). You can select a subset of non-overlapping jobs to maximize total weight, subject to a **cooldown** constraint: after finishing a job that ends at time `e`, the next selected job must start at time >= `e + cooldown`.\n\nReturn the maximum total weight achievable.\n\nFunction signature:\ndef max_weight(jobs: list[list[int]], cooldown: int) -> int:",
+  "function_signature": "def max_weight(jobs: list[list[int]], cooldown: int) -> int:",
+  "constraints": [
+    "0 <= len(jobs) <= 10^4",
+    "0 <= start < end <= 10^9",
+    "1 <= weight <= 10^4",
+    "0 <= cooldown <= 10^9"
+  ],
+  "test_cases": [
+    {
+      "id": "tc_001",
+      "input": {
+        "jobs": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            5,
+            6
+          ],
+          [
+            4,
+            6,
+            5
+          ],
+          [
+            6,
+            7,
+            4
+          ],
+          [
+            5,
+            8,
+            11
+          ],
+          [
+            7,
+            9,
+            2
+          ]
+        ],
+        "cooldown": 0
+      },
+      "expected_output": 17,
+      "description": ""
+    },
+    {
+      "id": "tc_002",
+      "input": {
+        "jobs": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            5,
+            6
+          ],
+          [
+            4,
+            6,
+            5
+          ],
+          [
+            6,
+            7,
+            4
+          ],
+          [
+            5,
+            8,
+            11
+          ],
+          [
+            7,
+            9,
+            2
+          ]
+        ],
+        "cooldown": 1
+      },
+      "expected_output": 16,
+      "description": ""
+    },
+    {
+      "id": "tc_003",
+      "input": {
+        "jobs": [
+          [
+            1,
+            2,
+            10
+          ],
+          [
+            2,
+            3,
+            10
+          ],
+          [
+            3,
+            4,
+            10
+          ]
+        ],
+        "cooldown": 0
+      },
+      "expected_output": 30,
+      "description": ""
+    },
+    {
+      "id": "tc_004",
+      "input": {
+        "jobs": [
+          [
+            1,
+            2,
+            10
+          ],
+          [
+            2,
+            3,
+            10
+          ],
+          [
+            3,
+            4,
+            10
+          ]
+        ],
+        "cooldown": 1
+      },
+      "expected_output": 20,
+      "description": ""
+    },
+    {
+      "id": "tc_005",
+      "input": {
+        "jobs": [],
+        "cooldown": 0
+      },
+      "expected_output": 0,
+      "description": ""
+    },
+    {
+      "id": "tc_006",
+      "input": {
+        "jobs": [
+          [
+            1,
+            5,
+            100
+          ]
+        ],
+        "cooldown": 2
+      },
+      "expected_output": 100,
+      "description": ""
+    },
+    {
+      "id": "tc_007",
+      "input": {
+        "jobs": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            4,
+            6,
+            5
+          ],
+          [
+            7,
+            9,
+            5
+          ]
+        ],
+        "cooldown": 1
+      },
+      "expected_output": 15,
+      "description": ""
+    },
+    {
+      "id": "tc_008",
+      "input": {
+        "jobs": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            3,
+            5,
+            5
+          ],
+          [
+            5,
+            7,
+            5
+          ]
+        ],
+        "cooldown": 2
+      },
+      "expected_output": 10,
+      "description": ""
+    },
+    {
+      "id": "tc_009",
+      "input": {
+        "jobs": [
+          [
+            1,
+            4,
+            3
+          ],
+          [
+            2,
+            6,
+            10
+          ],
+          [
+            5,
+            8,
+            4
+          ],
+          [
+            6,
+            9,
+            2
+          ]
+        ],
+        "cooldown": 1
+      },
+      "expected_output": 10,
+      "description": ""
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-05-31T00:00:00Z",
+    "tags": [
+      "dynamic-programming",
+      "binary-search",
+      "greedy",
+      "scheduling"
+    ]
+  }
+}

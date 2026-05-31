@@ -1,0 +1,9 @@
+{
+  "default_temperature": 0.0,
+  "seed": 42,
+  "max_tokens": 65536,
+  "execution_timeout_seconds": 10,
+  "tasks_dir": "tasks",
+  "attempts_dir": "attempts",
+  "results_dir": "results"
+}

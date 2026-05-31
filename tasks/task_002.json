@@ -1,0 +1,604 @@
+{
+  "id": "task_002",
+  "title": "LRU Cache with TTL Expiry",
+  "language": "python",
+  "difficulty": "hard",
+  "source": "Custom \u2014 LRU + TTL combined",
+  "description": "Implement a class `LRUCache` with time-to-live (TTL) expiry.\n\n`__init__(self, capacity: int)` \u2014 sets max capacity.\n\n`get(self, key: int, now: int) -> int` \u2014 returns the value if the key exists AND has not expired (i.e. `inserted_at + ttl > now`). Returns -1 otherwise. A successful get counts as a use (updates LRU order).\n\n`put(self, key: int, value: int, ttl: int, now: int) -> None` \u2014 inserts or updates the key with the given value and TTL. If the key already exists, update its value and reset its TTL. When at capacity, first lazily evict any expired keys; if still at capacity, evict the Least Recently Used key.\n\nIf `capacity == 0`, the cache stores nothing.\n\nclass LRUCache:\n    def __init__(self, capacity: int): ...\n    def get(self, key: int, now: int) -> int: ...\n    def put(self, key: int, value: int, ttl: int, now: int) -> None: ...",
+  "function_signature": "class LRUCache:\n    def __init__(self, capacity: int): ...\n    def get(self, key: int, now: int) -> int: ...\n    def put(self, key: int, value: int, ttl: int, now: int) -> None: ...",
+  "constraints": [
+    "0 <= capacity <= 3000",
+    "0 <= key <= 10^4",
+    "0 <= value <= 10^5",
+    "1 <= ttl <= 10^6",
+    "0 <= now <= 10^9",
+    "now is non-decreasing across operations"
+  ],
+  "test_cases": [
+    {
+      "id": "tc_001",
+      "input": {
+        "capacity": 2,
+        "operations": [
+          [
+            "put",
+            1,
+            10,
+            5,
+            0
+          ],
+          [
+            "get",
+            1,
+            3
+          ],
+          [
+            "get",
+            1,
+            6
+          ]
+        ]
+      },
+      "expected_output": [
+        10,
+        -1
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_002",
+      "input": {
+        "capacity": 2,
+        "operations": [
+          [
+            "put",
+            1,
+            10,
+            2,
+            0
+          ],
+          [
+            "put",
+            2,
+            20,
+            10,
+            0
+          ],
+          [
+            "put",
+            3,
+            30,
+            10,
+            3
+          ],
+          [
+            "get",
+            1,
+            3
+          ],
+          [
+            "get",
+            2,
+            3
+          ],
+          [
+            "get",
+            3,
+            3
+          ]
+        ]
+      },
+      "expected_output": [
+        -1,
+        20,
+        30
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_003",
+      "input": {
+        "capacity": 2,
+        "operations": [
+          [
+            "put",
+            1,
+            1,
+            100,
+            0
+          ],
+          [
+            "put",
+            2,
+            2,
+            100,
+            0
+          ],
+          [
+            "get",
+            1,
+            1
+          ],
+          [
+            "put",
+            3,
+            3,
+            100,
+            2
+          ],
+          [
+            "get",
+            2,
+            2
+          ],
+          [
+            "get",
+            3,
+            2
+          ]
+        ]
+      },
+      "expected_output": [
+        1,
+        -1,
+        3
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_004",
+      "input": {
+        "capacity": 0,
+        "operations": [
+          [
+            "put",
+            1,
+            1,
+            10,
+            0
+          ],
+          [
+            "get",
+            1,
+            1
+          ]
+        ]
+      },
+      "expected_output": [
+        -1
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_005",
+      "input": {
+        "capacity": 2,
+        "operations": [
+          [
+            "put",
+            1,
+            10,
+            2,
+            0
+          ],
+          [
+            "put",
+            1,
+            20,
+            10,
+            1
+          ],
+          [
+            "get",
+            1,
+            3
+          ]
+        ]
+      },
+      "expected_output": [
+        20
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_006",
+      "input": {
+        "capacity": 3,
+        "operations": [
+          [
+            "put",
+            1,
+            1,
+            3,
+            0
+          ],
+          [
+            "put",
+            2,
+            2,
+            3,
+            0
+          ],
+          [
+            "put",
+            3,
+            3,
+            10,
+            0
+          ],
+          [
+            "get",
+            1,
+            3
+          ],
+          [
+            "get",
+            2,
+            3
+          ],
+          [
+            "get",
+            3,
+            3
+          ]
+        ]
+      },
+      "expected_output": [
+        -1,
+        -1,
+        3
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_007",
+      "input": {
+        "capacity": 2,
+        "operations": [
+          [
+            "get",
+            5,
+            0
+          ]
+        ]
+      },
+      "expected_output": [
+        -1
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_008",
+      "input": {
+        "capacity": 1,
+        "operations": [
+          [
+            "put",
+            1,
+            10,
+            2,
+            0
+          ],
+          [
+            "get",
+            1,
+            3
+          ],
+          [
+            "put",
+            1,
+            99,
+            10,
+            4
+          ],
+          [
+            "get",
+            1,
+            5
+          ]
+        ]
+      },
+      "expected_output": [
+        -1,
+        99
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_009",
+      "input": {
+        "capacity": 2,
+        "operations": [
+          [
+            "put",
+            1,
+            10,
+            3,
+            0
+          ],
+          [
+            "put",
+            2,
+            20,
+            3,
+            0
+          ],
+          [
+            "get",
+            1,
+            2
+          ],
+          [
+            "get",
+            1,
+            4
+          ],
+          [
+            "put",
+            1,
+            99,
+            10,
+            5
+          ],
+          [
+            "get",
+            1,
+            6
+          ]
+        ]
+      },
+      "expected_output": [
+        10,
+        -1,
+        99
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_010",
+      "input": {
+        "capacity": 2,
+        "operations": [
+          [
+            "put",
+            1,
+            1,
+            100,
+            0
+          ],
+          [
+            "put",
+            2,
+            2,
+            100,
+            0
+          ],
+          [
+            "get",
+            1,
+            1
+          ],
+          [
+            "put",
+            3,
+            3,
+            100,
+            2
+          ],
+          [
+            "get",
+            1,
+            2
+          ],
+          [
+            "get",
+            2,
+            2
+          ],
+          [
+            "get",
+            3,
+            2
+          ]
+        ]
+      },
+      "expected_output": [
+        1,
+        1,
+        -1,
+        3
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_011",
+      "input": {
+        "capacity": 3,
+        "operations": [
+          [
+            "put",
+            1,
+            1,
+            2,
+            0
+          ],
+          [
+            "put",
+            2,
+            2,
+            2,
+            0
+          ],
+          [
+            "put",
+            3,
+            3,
+            2,
+            0
+          ],
+          [
+            "put",
+            4,
+            4,
+            10,
+            3
+          ],
+          [
+            "get",
+            1,
+            3
+          ],
+          [
+            "get",
+            4,
+            3
+          ]
+        ]
+      },
+      "expected_output": [
+        -1,
+        4
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_012",
+      "input": {
+        "capacity": 1,
+        "operations": [
+          [
+            "put",
+            1,
+            10,
+            3,
+            0
+          ],
+          [
+            "put",
+            1,
+            20,
+            10,
+            2
+          ],
+          [
+            "get",
+            1,
+            5
+          ],
+          [
+            "get",
+            1,
+            12
+          ],
+          [
+            "get",
+            1,
+            13
+          ]
+        ]
+      },
+      "expected_output": [
+        20,
+        -1,
+        -1
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_013",
+      "input": {
+        "capacity": 1,
+        "operations": [
+          [
+            "put",
+            1,
+            1,
+            100,
+            0
+          ],
+          [
+            "put",
+            2,
+            2,
+            100,
+            1
+          ],
+          [
+            "put",
+            3,
+            3,
+            100,
+            2
+          ],
+          [
+            "get",
+            1,
+            3
+          ],
+          [
+            "get",
+            2,
+            3
+          ],
+          [
+            "get",
+            3,
+            3
+          ]
+        ]
+      },
+      "expected_output": [
+        -1,
+        -1,
+        3
+      ],
+      "description": ""
+    },
+    {
+      "id": "tc_014",
+      "input": {
+        "capacity": 2,
+        "operations": [
+          [
+            "put",
+            1,
+            42,
+            5,
+            0
+          ],
+          [
+            "get",
+            1,
+            4
+          ],
+          [
+            "get",
+            1,
+            5
+          ],
+          [
+            "get",
+            1,
+            6
+          ]
+        ]
+      },
+      "expected_output": [
+        42,
+        -1,
+        -1
+      ],
+      "description": ""
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-05-31T00:00:00Z",
+    "tags": [
+      "design",
+      "hash-map",
+      "linked-list",
+      "ttl",
+      "lru"
+    ]
+  }
+}

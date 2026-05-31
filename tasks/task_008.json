@@ -1,0 +1,206 @@
+{
+  "id": "task_008",
+  "title": "Matrix Chain with Forbidden Splits",
+  "language": "python",
+  "difficulty": "hard",
+  "source": "Custom \u2014 matrix chain multiplication + forbidden pairs",
+  "description": "Write a Python function `matrix_chain(dims: list[int], forbidden: list[list[int]]) -> int`.\n\nGiven `n` matrices where matrix `i` has dimensions `dims[i] x dims[i+1]`, find the minimum number of scalar multiplications to compute their product.\n\nHowever, certain split points are **forbidden**: `forbidden[k] = [i, j]` means you may NOT use the split where the last multiplication combines the subchain `[i..k]` with `[k+1..j]` for any `k` in `[i, j-1]`. In other words, the subchain `[i..j]` (0-indexed) cannot be computed as a single direct product of two sub-results \u2014 it must be split differently.\n\nReturn the minimum cost, or -1 if it is impossible to compute the full product under the given constraints.\n\nFunction signature:\ndef matrix_chain(dims: list[int], forbidden: list[list[int]]) -> int:",
+  "function_signature": "def matrix_chain(dims: list[int], forbidden: list[list[int]]) -> int:",
+  "constraints": [
+    "2 <= len(dims) <= 15 (so 1 to 14 matrices)",
+    "1 <= dims[i] <= 100",
+    "0 <= len(forbidden) <= 20",
+    "forbidden[k] = [i, j] with 0 <= i < j <= n-1"
+  ],
+  "test_cases": [
+    {
+      "id": "tc_001",
+      "input": {
+        "dims": [
+          10,
+          30,
+          5,
+          60
+        ],
+        "forbidden": []
+      },
+      "expected_output": 4500,
+      "description": ""
+    },
+    {
+      "id": "tc_002",
+      "input": {
+        "dims": [
+          10,
+          30,
+          5,
+          60
+        ],
+        "forbidden": [
+          [
+            0,
+            2
+          ]
+        ]
+      },
+      "expected_output": 4500,
+      "description": ""
+    },
+    {
+      "id": "tc_003",
+      "input": {
+        "dims": [
+          5,
+          10,
+          3,
+          12,
+          5,
+          50,
+          6
+        ],
+        "forbidden": []
+      },
+      "expected_output": 2010,
+      "description": ""
+    },
+    {
+      "id": "tc_004",
+      "input": {
+        "dims": [
+          5,
+          10,
+          3,
+          12,
+          5,
+          50,
+          6
+        ],
+        "forbidden": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "expected_output": 2556,
+      "description": ""
+    },
+    {
+      "id": "tc_005",
+      "input": {
+        "dims": [
+          2,
+          3,
+          4
+        ],
+        "forbidden": []
+      },
+      "expected_output": 24,
+      "description": ""
+    },
+    {
+      "id": "tc_006",
+      "input": {
+        "dims": [
+          2,
+          3,
+          4
+        ],
+        "forbidden": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "expected_output": -1,
+      "description": ""
+    },
+    {
+      "id": "tc_007",
+      "input": {
+        "dims": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "forbidden": []
+      },
+      "expected_output": 38,
+      "description": ""
+    },
+    {
+      "id": "tc_008",
+      "input": {
+        "dims": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "forbidden": [
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      "expected_output": 38,
+      "description": ""
+    },
+    {
+      "id": "tc_009",
+      "input": {
+        "dims": [
+          40,
+          20,
+          30,
+          10,
+          30
+        ],
+        "forbidden": []
+      },
+      "expected_output": 26000,
+      "description": ""
+    },
+    {
+      "id": "tc_010",
+      "input": {
+        "dims": [
+          10,
+          20,
+          30,
+          40,
+          30
+        ],
+        "forbidden": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      "expected_output": 30000,
+      "description": ""
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-05-31T00:00:00Z",
+    "tags": [
+      "interval-dp",
+      "dynamic-programming",
+      "matrix-chain"
+    ]
+  }
+}

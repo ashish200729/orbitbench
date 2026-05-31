@@ -1,0 +1,258 @@
+{
+  "id": "task_004",
+  "title": "Design Twitter",
+  "language": "typescript",
+  "difficulty": "hard",
+  "source": "LeetCode #355",
+  "description": "Implement a simplified Twitter in TypeScript named `Twitter`.\n\n`postTweet(userId, tweetId)` composes a new tweet. `getNewsFeed(userId)` returns the IDs of the 10 most recent tweets in the user's feed (their own tweets and tweets from everyone they follow), ordered MOST RECENT FIRST. `follow(followerId, followeeId)` and `unfollow(followerId, followeeId)` manage following (a user cannot unfollow themselves; following is idempotent). Tweet recency is determined by the global order in which postTweet calls occur.\n\nclass Twitter {\n  postTweet(userId: number, tweetId: number): void {}\n  getNewsFeed(userId: number): number[] {}\n  follow(followerId: number, followeeId: number): void {}\n  unfollow(followerId: number, followeeId: number): void {}\n}",
+  "function_signature": "class Twitter { postTweet(userId: number, tweetId: number): void {} getNewsFeed(userId: number): number[] {} follow(followerId: number, followeeId: number): void {} unfollow(followerId: number, followeeId: number): void {} }",
+  "constraints": [
+    "1 <= userId, tweetId <= 10^4",
+    "At most 3*10^4 calls total",
+    "Feed returns at most 10 tweets, most recent first"
+  ],
+  "test_cases": [
+    {
+      "id": "tc_001",
+      "input": {
+        "operations": [
+          [
+            "postTweet",
+            1,
+            5
+          ],
+          [
+            "getNewsFeed",
+            1
+          ],
+          [
+            "follow",
+            1,
+            2
+          ],
+          [
+            "postTweet",
+            2,
+            6
+          ],
+          [
+            "getNewsFeed",
+            1
+          ],
+          [
+            "unfollow",
+            1,
+            2
+          ],
+          [
+            "getNewsFeed",
+            1
+          ]
+        ]
+      },
+      "expected_output": [
+        [
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5
+        ]
+      ],
+      "description": "Sequence of news feeds"
+    },
+    {
+      "id": "tc_002",
+      "input": {
+        "operations": [
+          [
+            "getNewsFeed",
+            1
+          ]
+        ]
+      },
+      "expected_output": [
+        []
+      ],
+      "description": "Sequence of news feeds"
+    },
+    {
+      "id": "tc_003",
+      "input": {
+        "operations": [
+          [
+            "postTweet",
+            1,
+            1
+          ],
+          [
+            "postTweet",
+            1,
+            2
+          ],
+          [
+            "postTweet",
+            1,
+            3
+          ],
+          [
+            "postTweet",
+            1,
+            4
+          ],
+          [
+            "postTweet",
+            1,
+            5
+          ],
+          [
+            "postTweet",
+            1,
+            6
+          ],
+          [
+            "postTweet",
+            1,
+            7
+          ],
+          [
+            "postTweet",
+            1,
+            8
+          ],
+          [
+            "postTweet",
+            1,
+            9
+          ],
+          [
+            "postTweet",
+            1,
+            10
+          ],
+          [
+            "postTweet",
+            1,
+            11
+          ],
+          [
+            "getNewsFeed",
+            1
+          ]
+        ]
+      },
+      "expected_output": [
+        [
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2
+        ]
+      ],
+      "description": "Sequence of news feeds"
+    },
+    {
+      "id": "tc_004",
+      "input": {
+        "operations": [
+          [
+            "follow",
+            1,
+            1
+          ],
+          [
+            "postTweet",
+            1,
+            5
+          ],
+          [
+            "getNewsFeed",
+            1
+          ]
+        ]
+      },
+      "expected_output": [
+        [
+          5
+        ]
+      ],
+      "description": "Sequence of news feeds"
+    },
+    {
+      "id": "tc_005",
+      "input": {
+        "operations": [
+          [
+            "postTweet",
+            1,
+            1
+          ],
+          [
+            "follow",
+            2,
+            1
+          ],
+          [
+            "postTweet",
+            2,
+            2
+          ],
+          [
+            "getNewsFeed",
+            2
+          ],
+          [
+            "follow",
+            2,
+            1
+          ],
+          [
+            "getNewsFeed",
+            2
+          ],
+          [
+            "unfollow",
+            2,
+            1
+          ],
+          [
+            "getNewsFeed",
+            2
+          ]
+        ]
+      },
+      "expected_output": [
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "description": "Sequence of news feeds"
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-05-30T00:00:00Z",
+    "tags": [
+      "design",
+      "hash-map",
+      "heap",
+      "sorting"
+    ]
+  }
+}

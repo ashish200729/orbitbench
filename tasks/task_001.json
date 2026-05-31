@@ -1,0 +1,161 @@
+{
+  "id": "task_001",
+  "title": "Expression Evaluator (with precedence and unary minus)",
+  "language": "python",
+  "difficulty": "hard",
+  "source": "LeetCode #772 variant (Basic Calculator III + unary)",
+  "description": "Write a Python function `calculate(expression: str) -> int` that evaluates an arithmetic expression and returns its integer value.\n\nThe expression contains non-negative integers, the binary operators `+`, `-`, `*`, `/`, parentheses `(` and `)`, and spaces. A `-` may also be a UNARY minus (e.g. `-3`, `2*-3`, `-(1+2)`). Operator precedence is standard: `*` and `/` bind tighter than `+` and `-`; parentheses override precedence. Integer division must TRUNCATE TOWARD ZERO (so `-7/2 == -3` and `6/-4 == -1`). The expression is always valid.\n\nFunction signature:\ndef calculate(expression: str) -> int:",
+  "function_signature": "def calculate(expression: str) -> int:",
+  "constraints": [
+    "1 <= len(expression) <= 10^4",
+    "Integer division truncates toward zero",
+    "Result fits in a 64-bit signed integer"
+  ],
+  "test_cases": [
+    {
+      "id": "tc_001",
+      "input": {
+        "expression": "1+1"
+      },
+      "expected_output": 2,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_002",
+      "input": {
+        "expression": " 2-1 + 2 "
+      },
+      "expected_output": 3,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_003",
+      "input": {
+        "expression": "(1+(4+5+2)-3)+(6+8)"
+      },
+      "expected_output": 23,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_004",
+      "input": {
+        "expression": "2+3*4"
+      },
+      "expected_output": 14,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_005",
+      "input": {
+        "expression": "2*3+4"
+      },
+      "expected_output": 10,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_006",
+      "input": {
+        "expression": "100/3"
+      },
+      "expected_output": 33,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_007",
+      "input": {
+        "expression": "14-3/2"
+      },
+      "expected_output": 13,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_008",
+      "input": {
+        "expression": "-2+3"
+      },
+      "expected_output": 1,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_009",
+      "input": {
+        "expression": "-(3+4)"
+      },
+      "expected_output": -7,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_010",
+      "input": {
+        "expression": "2*-3"
+      },
+      "expected_output": -6,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_011",
+      "input": {
+        "expression": "6/-4"
+      },
+      "expected_output": -1,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_012",
+      "input": {
+        "expression": "-7/2"
+      },
+      "expected_output": -3,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_013",
+      "input": {
+        "expression": "3+(-(1+2))"
+      },
+      "expected_output": 0,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_014",
+      "input": {
+        "expression": "1-(-2)"
+      },
+      "expected_output": 3,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_015",
+      "input": {
+        "expression": "2*(5+5*2)/3+(6/2+8)"
+      },
+      "expected_output": 21,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_016",
+      "input": {
+        "expression": "(2+6*3+5-(3*14/7+2)*5)+3"
+      },
+      "expected_output": -12,
+      "description": "Expression evaluation"
+    },
+    {
+      "id": "tc_017",
+      "input": {
+        "expression": "0-2147483647"
+      },
+      "expected_output": -2147483647,
+      "description": "Expression evaluation"
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-05-30T00:00:00Z",
+    "tags": [
+      "parsing",
+      "stack",
+      "recursion",
+      "math"
+    ]
+  }
+}
